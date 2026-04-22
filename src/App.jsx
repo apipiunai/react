@@ -16,12 +16,12 @@ function App() {
 
         {/* Rutas con layout */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="setup" replace />} />
-          <Route path="setup" element={<Setup />} />
-          <Route path="components" element={<Components />} />
-          <Route path="react-functions" element={<ReactFunctions />} />
-          <Route path="functions" element={<Functions />} />
-          <Route path="complexes" element={<Complexes />} />
+          <Route index element={<Navigate to="/setup" replace />} />
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/components" element={<Components />} />
+          <Route path="/react-functions" element={<ReactFunctions />} />
+          <Route path="/functions" element={<Functions />} />
+          <Route path="/complexes" element={<Complexes />} />
         </Route>
 
         {/* fallback */}
