@@ -1,0 +1,16 @@
+{
+    "español": {
+        "Setup": "Instalacion",
+        "Components": "Componentes",
+        "ReactFunctions": "Funciones de React",
+        "Functions": "Funciones",
+        "Complexes": "Compuestos"
+    },
+    "ingles": {
+        "Setup": "Setup",
+        "Components": "Components",
+        "ReactFunctions": "React Functions",
+        "Functions": "Functions",
+        "Complexes": "Complexes"
+    }
+}
