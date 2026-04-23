@@ -28,11 +28,11 @@ export default function Layout() {
         { name: "ingles", img: "images/en.png" }
     ]
     const pages = [
-        { name: diccionario.Setup, path: "/setup" },
-        { name: diccionario.Components, path: "/components" },
-        { name: diccionario.ReactFunctions, path: "/react-functions" },
-        { name: diccionario.Functions, path: "/functions" },
-        { name: diccionario.Complexes, path: "/complexes" }
+        { name: diccionario?.Setup || "Setup", path: "/setup" },
+        { name: diccionario?.Components || "Components", path: "/components" },
+        { name: diccionario?.ReactFunctions || "React Functions", path: "/react-functions" },
+        { name: diccionario?.Functions || "Functions", path: "/functions" },
+        { name: diccionario?.Complexes || "Complexes", path: "/complexes" }
     ];
 
     const [headerHeight, setHeaderHeight] = useState(80);
@@ -75,9 +75,9 @@ export default function Layout() {
                     <IconHover onClick={() => setOpenSidebar(!openSidebar)} icon={<MenuIcon />} />
                 </div>
                 <div style={{ display: "flex", gap: 10, alignItems: "center", paddingRight: "20px" }}>
-                    <Divider orientation="vertical" flexItem style={{ marginRight: 20, backgroundColor: theme.border }} />
+                    {!smallScreen && <Divider orientation="vertical" flexItem style={{ marginRight: 20, backgroundColor: theme.border }} />}
 
-                    <Desplegable icon={<img height="20px" width="30px" src={idiomas.find(l => l.name === idioma)?.img} alt={idioma} style={{ cursor: "pointer" }} />} children={<div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    {!smallScreen && <Desplegable icon={<img height="20px" width="30px" src={idiomas.find(l => l.name === idioma)?.img || "images/es.png"} alt={idioma} style={{ cursor: "pointer" }} />} children={<div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                         <div
                             style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "center" }}
                         >
@@ -85,12 +85,20 @@ export default function Layout() {
                                 idioma === l.name ? null : <img key={l.name} height="20px" width="30px" src={l.img} alt={l.name} style={{ cursor: "pointer" }} onClick={() => setIdioma(l.name)} />
                             ))}
                         </div>
-                    </div>} />
+                    </div>} />}
 
-                    <Desplegable style={{ padding: 10 }} icon={<IconHover icon={<SettingsIcon />} />}>
+                    <Desplegable style={{ padding: 10, display: "flex", flexDirection:"column", gap: 10, justifyContent:"center" }} icon={<IconHover icon={<SettingsIcon />} />}>
                         {mode === "default" ?
                             <IconHover onClick={() => setMode("dark")} icon={<DarkModeIcon />} /> :
                             <IconHover onClick={() => setMode("default")} icon={<Brightness7Icon />} />
+                        }
+                        {smallScreen &&
+                            <>
+                                {idioma === "español" ?
+                                    <IconHover onClick={() => setIdioma("ingles")} icon={<img height="20px" width="30px" src="images/en.png" alt="ingles" style={{ cursor: "pointer" }} />} /> :
+                                    <IconHover onClick={() => setIdioma("español")} icon={<img height="20px" width="30px" src="images/es.png" alt="español" style={{ cursor: "pointer" }} />} />
+                                }
+                            </>
                         }
                     </Desplegable>
 
@@ -108,7 +116,7 @@ export default function Layout() {
 
                     {pages.map((page) => (
                         <div key={page.name} style={{ padding: 15, display: "flex", alignItems: "center", justifyContent: "center", gap: 10, borderBottom: `1px solid ${theme.border}` }}>
-                            <Link to={page.path} style={{ textDecoration: "none", color: location.pathname.includes(page.path) ? theme.main : theme.text1, cursor: "pointer"}}>
+                            <Link to={page.path} style={{ textDecoration: "none", color: location.pathname.includes(page.path) ? theme.main : theme.text1, cursor: "pointer" }}>
                                 {page.name}
                             </Link>
                         </div>
@@ -137,13 +145,13 @@ export default function Layout() {
             </div>
 
 
-<style>
-    {`
+            <style>
+                {`
     pre{
         color: ${theme.code};
     }
     `}
-</style>
+            </style>
 
         </div>
 

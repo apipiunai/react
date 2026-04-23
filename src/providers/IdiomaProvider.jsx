@@ -21,9 +21,19 @@ export const IdiomaProvider = ({ children }) => {
     }, [idioma]);
 
     const getDiccionario = async () => {
-        const response = await fetch("diccionario.json");
-        const data = await response.json();
-        return data[idioma];
+        try {
+            const baseUrl = import.meta.env.BASE_URL || "/";
+            const response = await fetch(`${baseUrl}diccionario.json`);
+            if (!response.ok) {
+                console.error("Failed to fetch dictionary", response.status);
+                return null;
+            }
+            const data = await response.json();
+            return data[idioma] || data["español"] || {};
+        } catch (error) {
+            console.error("Error loading dictionary:", error);
+            return {};
+        }
     }
 
     const [diccionario, setDiccionario] = useState({});
@@ -31,7 +41,9 @@ export const IdiomaProvider = ({ children }) => {
     useEffect(() => {
         const actualizarDiccionario = async () => {
             const data = await getDiccionario();
-            setDiccionario(data);
+            if (data) {
+                setDiccionario(data);
+            }
         }
         actualizarDiccionario();
     }, [idioma]);

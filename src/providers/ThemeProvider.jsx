@@ -52,7 +52,7 @@ const palettes = {
     },
     dark: {
         background: "#121212", 
-        card: "#c36464ff",       
+        card: "#555",       
         cardBox: "#2b2b2bff",
         header: "#444",  
         sidebar: "#444",   
@@ -60,7 +60,7 @@ const palettes = {
         main: "#6ac2fdff",
         text1: "#ffffff",      
         text2: "#b0b0b0",      
-        textContrast1: "#491d1dff", 
+        textContrast1: "#222", 
         textContrast2: "#ffffff", 
         code: "#9bcbd7ff",
         hover: "#ffffff33",    
